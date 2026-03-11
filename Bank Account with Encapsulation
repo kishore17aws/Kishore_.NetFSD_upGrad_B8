@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BankAccount
+{
+    class BankAccount
+    {
+        private double balance;
+        private const double MinBal = 500;
+
+        public void Deposit(double amount)
+        {
+            balance = balance + amount;
+        }
+
+        public void Withdraw(double amount)
+        {
+            if (balance - amount >= MinBal)
+            {
+                balance = balance - amount;
+            }
+            else
+            {
+                Console.WriteLine("Withdrawal not allowed. Minimum balance of 500 must be maintained.");
+            }
+        }
+
+        public double GetBalance()
+        {
+            return balance;
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            BankAccount account = new BankAccount();
+
+            Console.Write("Enter deposit amount: ");
+            double deposit = Convert.ToDouble(Console.ReadLine());
+            account.Deposit(deposit);
+
+            Console.Write("Enter withdraw amount: ");
+            double withdraw = Convert.ToDouble(Console.ReadLine());
+            account.Withdraw(withdraw);
+
+            Console.WriteLine("Current Balance: " + account.GetBalance());
+            Console.ReadLine();
+        }
+    }
+}
