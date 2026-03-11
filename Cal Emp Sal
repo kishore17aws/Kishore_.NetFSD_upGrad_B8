@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmpSalCal
+{
+    class Employee
+    {
+        public double Salary { get; set;}
+
+        public virtual double CalSalary()
+        {
+            return Salary;
+        }
+    }
+
+    class Manager : Employee
+    {
+        public override double CalSalary()
+        {
+            return Salary + (Salary * 0.20);
+        }
+    }
+
+    class Developer : Employee
+    {
+        public override double CalSalary()
+        {
+            return Salary + (Salary * 0.10);
+        }
+    }
+
+    class Program
+    {
+        static void Main()
+        {
+            Console.Write("Enter Role (Manager/Developer): ");
+            string role = Console.ReadLine().ToLower();
+
+            Console.Write("Enter Salary: ");
+            double salary = Convert.ToDouble(Console.ReadLine());
+
+            Employee emp;
+
+            switch (role)
+            {
+                case "manager":
+                    emp = new Manager();
+                    break;
+                case "developer":
+                    emp = new Developer();
+                    break;
+                default:
+                    Console.WriteLine("Invalid Role");
+                    return;
+            }
+
+            emp.Salary = salary;
+
+            Console.WriteLine(role + " Salary = " + emp.CalSalary());
+            Console.ReadLine();
+        }
+    }
+}
